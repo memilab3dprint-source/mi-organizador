@@ -9,8 +9,11 @@ import Tasks from './views/Tasks';
 import CalendarView from './views/Calendar';
 import Settings from './views/Settings';
 import Stats from './views/Stats';
+import Logbook from './views/Logbook';
+import Inventory from './views/Inventory';
+import QualityControlView from './views/QualityControl';
 
-type Tab = 'today' | 'calendar' | 'projects' | 'tasks' | 'stats' | 'settings';
+type Tab = 'today' | 'calendar' | 'projects' | 'tasks' | 'logbook' | 'inventory' | 'quality' | 'stats' | 'settings';
 
 export default function App() {
   const [data, setDataState] = useState<AppData>(() => {
@@ -53,6 +56,15 @@ export default function App() {
         <button className={tab === 'tasks' ? 'nav-btn nav-btn-active' : 'nav-btn'} onClick={() => setTab('tasks')}>
           ✅ Tareas
         </button>
+        <button className={tab === 'logbook' ? 'nav-btn nav-btn-active' : 'nav-btn'} onClick={() => setTab('logbook')}>
+          📓 Bitácora
+        </button>
+        <button className={tab === 'inventory' ? 'nav-btn nav-btn-active' : 'nav-btn'} onClick={() => setTab('inventory')}>
+          📦 Insumos
+        </button>
+        <button className={tab === 'quality' ? 'nav-btn nav-btn-active' : 'nav-btn'} onClick={() => setTab('quality')}>
+          🔍 Calidad
+        </button>
         <button className={tab === 'stats' ? 'nav-btn nav-btn-active' : 'nav-btn'} onClick={() => setTab('stats')}>
           📊 Progreso
         </button>
@@ -65,6 +77,9 @@ export default function App() {
         {tab === 'calendar' && <CalendarView data={data} setData={setData} />}
         {tab === 'projects' && <Projects data={data} setData={setData} />}
         {tab === 'tasks' && <Tasks data={data} setData={setData} />}
+        {tab === 'logbook' && <Logbook data={data} setData={setData} />}
+        {tab === 'inventory' && <Inventory data={data} setData={setData} />}
+        {tab === 'quality' && <QualityControlView data={data} setData={setData} />}
         {tab === 'stats' && <Stats data={data} />}
         {tab === 'settings' && <Settings data={data} setData={setData} />}
       </main>

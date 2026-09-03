@@ -10,6 +10,9 @@ export function parseAppData(raw: string): AppData {
     projects: parsed.projects ?? [],
     standaloneTasks: parsed.standaloneTasks ?? [],
     notes: parsed.notes ?? [],
+    logEntries: parsed.logEntries ?? [],
+    supplies: parsed.supplies ?? [],
+    qualityChecks: parsed.qualityChecks ?? [],
     dailyPlans: (parsed.dailyPlans ?? []).filter(
       (p): p is AppData['dailyPlans'][number] => Array.isArray(p.projectTaskIds) && Array.isArray(p.standaloneTaskIds),
     ),

@@ -66,10 +66,53 @@ export interface Note {
   createdAt: string;
 }
 
+/** Entrada de bitácora de trabajo: se abre al empezar y se cierra al terminar, con hora real. */
+export interface LogEntry {
+  id: string;
+  text: string;
+  projectId?: string;
+  openedAt: string;
+  closedAt?: string;
+  status: 'open' | 'closed';
+}
+
+/** Insumo del inventario (materiales, packaging, filamento, etc.). */
+export interface Supply {
+  id: string;
+  name: string;
+  quantity: number;
+  unit: string;
+  minStock: number;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface QualityCheckItem {
+  id: string;
+  label: string;
+  passed: boolean;
+}
+
+/** Registro de control de calidad sobre un producto/pedido/pieza, con checklist propia. */
+export interface QualityCheck {
+  id: string;
+  title: string;
+  projectId?: string;
+  items: QualityCheckItem[];
+  result: 'pending' | 'approved' | 'rejected';
+  notes?: string;
+  createdAt: string;
+  closedAt?: string;
+}
+
 export interface AppData {
   projects: Project[];
   standaloneTasks: StandaloneTask[];
   notes: Note[];
+  logEntries: LogEntry[];
+  supplies: Supply[];
+  qualityChecks: QualityCheck[];
   dailyPlans: DailyPlan[];
   settings: {
     dailyMinutesAvailable: number;
@@ -106,6 +149,9 @@ export function createDefaultData(): AppData {
     projects: [],
     standaloneTasks: [],
     notes: [],
+    logEntries: [],
+    supplies: [],
+    qualityChecks: [],
     dailyPlans: [],
     settings: {
       dailyMinutesAvailable: 120,
